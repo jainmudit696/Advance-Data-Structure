@@ -31,6 +31,7 @@ int main() {
 }
 
 
+
 Problem Statement:  2)   Currency notes are available in the following seven denominations: Rs. 1, Rs. 2, Rs. 5, Rs. 10, Rs. 20, Rs.50, and Rs. 100.
 You will first read an integer array (named purse [7]) of seven elements, where the array elements represent the number of notes of each denomination (in increasing order of denomination) available with you. You are also given an amount of money to be paid using these notes. The amount will be less than Rs. 1000. You have to pay the amount using minimum number of notes. Print the number of notes of each denomination which you will use to pay the amount. If the amount cannot be paid using the available notes, print “Failed to Pay”.
 
@@ -89,6 +90,7 @@ int main() {
     MinimumNotes(wallet, amount, notesUsed, denominations, denominationsSize);
     return 0;
 }
+
 
 
 Problem Statement: 3) Write functions to perform the following operations with two-dimensional arrays.
