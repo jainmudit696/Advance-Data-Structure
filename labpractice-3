@@ -1,0 +1,154 @@
+Problem Statement - 1) Given two strings S1 and S2, write a program to print the number of times the first string S1 appears in the second string S2 as a substring. For example if S1 is “atg” and S2 is “batgccatgatatga”, then the program should print 3. Program should work correctly for all possible inputs. DO NOT use any of the library functions defined under strings described above.
+
+
+Algorithm :
+
+1. Read the first string “S1” and Read the second string “S2”.
+2. Define a function “countSubstringOccurrences” that takes two character arrays “S1” and “S2” as
+parameters.
+3. Initialize a variable “count” to 0 to keep track of the number of occurrences.
+4. Iterate Through Characters in S2:
+   a. Start a loop to iterate through each character in “S2”.
+   b. Initialize a variable “j” to 0.
+               c. Within the loop, check if “S1[j]” is equal to “S2[i + j]” and not at the end of either string.
+   d. If true, increment “j”.
+   e. Repeat this process until the characters don't match or until the end of “S1”
+   f. If the end of “S1” is reached, increment the “count”.
+5. Display the value of “count” as the number of times “S1” appears as a substring in “S2”.
+
+
+
+Source Code :
+
+#include <stdio.h>
+#include <string.h>
+
+int countSubstringOccurrences(const char* S1, const char* S2) {
+    int count = 0;
+    for (int i = 0; S2[i] != '\0'; i++) {
+        int j = 0;
+        while (S1[j] != '\0' && S2[i + j] != '\0' && S1[j] == S2[i + j]) {
+            j++;
+        }
+        if (S1[j] == '\0') {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    const int maxSize = 100; 
+    char S1[maxSize], S2[maxSize];
+    printf("Enter the first string (S1): ");
+    fgets(S1, maxSize, stdin);
+    S1[strcspn(S1, "\n")] = '\0';  
+
+    printf("Enter the second string (S2): ");
+    fgets(S2, maxSize, stdin);
+    S2[strcspn(S2, "\n")] = '\0';  
+
+    int occurrences = countSubstringOccurrences(S1, S2);
+    printf("Number of occurrences of S1 in S2: %d\n", occurrences);
+
+    return 0;
+}
+
+
+
+
+Time Complexity: O(n * m)
+Space Complexity: O(1)
+
+
+
+Sample Output :
+
+ 
+
+
+
+
+
+
+
+Problem Statement - 2) The absolute distance between two integers x1 and x2 is given by | x2 – x1 |. Write a function which sorts an array x[ ] of n integers in ascending order of their absolute distances with a given number z. For example, given x[ ] = {9, 1, 12, 4, 2} and z = 6, the sorted array will be x[ ] = {4, 9, 2, 1, 12}. Note that 4 is closest to 6, and 12 is farthest from 6, in terms of absolute distances. The function will have the following prototype: void dist_sort( int x[ ], int n, int z ) ;
+
+
+Algorithm : 
+
+1.	Input: - Read the value of x., number of elements n and Read the elements of the array “x”.
+2. Define a `swap` function to swap two integers and Define a “ dist_sort “ function that takes z, x, and n as parameters.
+3. Calculate the absolute difference for each element in the array and store it in the “diffArr” array.
+4. Use a bubble sort to arrange elements based on the absolute difference:
+   a. Iterate over the array from the first to the second-to-last element.
+   b. For each iteration, compare adjacent elements in both “diffArr” and “x”.
+   c. If the absolute difference is greater or if the absolute differences are equal but the element in
+       “x” is greater, swap the elements.
+   d. Continue until the array is sorted.
+5. Call the “dist_sort “ function with the input values in the main function.
+6. Display the sorted array based on absolute difference.
+
+
+
+
+
+
+
+Source Code :
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void dist_sort(int z, int x[], int n) {
+    int diffArr[n];
+    for (int i = 0; i < n; i++) {
+        diffArr[i] = abs(z - x[i]);
+    }
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (diffArr[j] > diffArr[j + 1] || (diffArr[j] == diffArr[j + 1] && x[j] > x[j + 1])) {
+                swap(&diffArr[j], &diffArr[j + 1]);
+                swap(&x[j], &x[j + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    int z;
+    printf("Enter the value of z: ");
+    scanf("%d", &z);
+
+    int n;
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    int x[n];
+    printf("Enter the elements of the array: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &x[i]);
+    }
+
+  
+  dist_sort(z, x, n);
+    printf("Sorted array based on absolute difference with %d: ", z);
+    for (int i = 0; i < n; i++) {
+        printf("%d ", x[i]);
+    }
+
+             return 0;
+}
+
+
+
+	Time Complexity: O(n * log(n))
+	Space Complexity: O(n)
+
